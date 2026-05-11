@@ -2,6 +2,7 @@ fastapi==0.115.6
 uvicorn[standard]==0.34.0
 pydantic==2.10.4
 httpx==0.28.1
+aiohttp==3.11.11
 azure-identity==1.19.0
 azure-keyvault-secrets==4.9.0
 azure-data-tables==12.6.0
