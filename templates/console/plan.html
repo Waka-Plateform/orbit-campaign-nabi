@@ -1,0 +1,50 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="plan">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Plan</p>
+      <h1 class="orbit-title">Scheduler campagne</h1>
+      <p class="orbit-subtitle">La campagne démarre uniquement selon ce planning : dates, fenêtres autorisées, throttling et taille de batch.</p>
+    </div>
+    <span class="orbit-badge info" id="plan-runtime-status">Chargement</span>
+  </div>
+
+  <div class="console-stat-grid">
+    <div class="console-stat"><span class="console-stat-value" id="plan-deferred-count">0</span><span class="console-stat-label">envois différés par fenêtre</span></div>
+    <div class="console-stat"><span class="console-stat-value" id="plan-throttled-count">0</span><span class="console-stat-label">envois throttled</span></div>
+    <div class="console-stat"><span class="console-stat-value" id="plan-next-run">—</span><span class="console-stat-label">prochaine exécution</span></div>
+  </div>
+
+  <form class="orbit-card orbit-stack" id="plan-form">
+    <div class="console-form-grid cols-2">
+      <label class="orbit-field"><span class="orbit-label">Début</span><input class="orbit-input" id="start_at" name="start_at" type="datetime-local"></label>
+      <label class="orbit-field"><span class="orbit-label">Fin optionnelle</span><input class="orbit-input" id="end_at" name="end_at" type="datetime-local"></label>
+      <label class="orbit-field"><span class="orbit-label">Fuseau horaire</span><select class="orbit-select" id="timezone" name="timezone"><option>Europe/Paris</option><option>UTC</option><option>Europe/London</option><option>America/New_York</option><option>Africa/Casablanca</option></select></label>
+      <label class="orbit-field"><span class="orbit-label">Taille de batch</span><input class="orbit-input" id="batch_size" name="batch_size" type="number" min="1" step="1"></label>
+    </div>
+
+    <section class="orbit-stack">
+      <div class="orbit-row-between"><h2>Fenêtres autorisées</h2><button class="orbit-btn small" id="plan-add-window" type="button"><i class="bi bi-plus-lg" aria-hidden="true"></i> Ajouter</button></div>
+      <div id="plan-windows" class="orbit-stack"></div>
+    </section>
+
+    <section class="console-form-grid cols-2">
+      <label class="orbit-field"><span class="orbit-label">Max par minute</span><input class="orbit-input" id="max_per_minute" name="max_per_minute" type="number" min="0" step="1"></label>
+      <label class="orbit-field"><span class="orbit-label">Max par heure</span><input class="orbit-input" id="max_per_hour" name="max_per_hour" type="number" min="0" step="1"></label>
+      <label class="orbit-field"><span class="orbit-label">Max par jour</span><input class="orbit-input" id="max_per_day" name="max_per_day" type="number" min="0" step="1"></label>
+    </section>
+
+    <div class="orbit-toolbar">
+      <button class="orbit-btn primary" type="submit"><i class="bi bi-save" aria-hidden="true"></i> Enregistrer le plan</button>
+      <button class="orbit-btn" type="button" data-plan-action="pause"><i class="bi bi-pause-fill" aria-hidden="true"></i> Pause</button>
+      <button class="orbit-btn" type="button" data-plan-action="resume"><i class="bi bi-play-fill" aria-hidden="true"></i> Reprendre</button>
+      <button class="orbit-btn" type="button" data-plan-action="start"><i class="bi bi-lightning-charge" aria-hidden="true"></i> Démarrer maintenant</button>
+      <button class="orbit-btn danger" type="button" data-plan-action="stop"><i class="bi bi-stop-fill" aria-hidden="true"></i> Arrêter</button>
+    </div>
+  </form>
+
+  <section class="orbit-card orbit-stack">
+    <div class="orbit-row-between"><h2>Timeline des envois</h2><span class="orbit-badge" id="plan-view-label">Vue semaine</span></div>
+    <div id="plan-timeline" class="orbit-stack"></div>
+  </section>
+</section>
+<script type="module" src="/static/js/plan.js"></script>
