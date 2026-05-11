@@ -1,0 +1,61 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="base">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Base contacts</p>
+      <h1 class="orbit-title">Prospects</h1>
+      <p class="orbit-subtitle">Table paginée de 50 contacts, recherche, filtres audience, export CSV et colonnes personnalisables.</p>
+    </div>
+    <div class="orbit-toolbar">
+      <button class="orbit-btn" type="button" id="base-columns-open"><i class="bi bi-layout-three-columns" aria-hidden="true"></i> Colonnes</button>
+      <a class="orbit-btn primary" id="base-export" href="/api/console/base/export"><i class="bi bi-download" aria-hidden="true"></i> Export CSV</a>
+    </div>
+  </div>
+
+  <form class="orbit-card console-form-grid cols-2" id="base-filters">
+    <label class="orbit-field">
+      <span class="orbit-label">Recherche</span>
+      <input class="orbit-input" id="base-search" name="q" type="search" placeholder="Nom, email, téléphone, entreprise">
+    </label>
+    <label class="orbit-field">
+      <span class="orbit-label">Audience</span>
+      <select class="orbit-select" id="base-audience" name="audience">
+        <option value="">Toutes les audiences</option>
+      </select>
+    </label>
+  </form>
+
+  <div class="orbit-card orbit-stack">
+    <div class="orbit-toolbar">
+      <span id="base-count" class="orbit-badge info">0 contact</span>
+      <span class="console-muted">Clavier : ← / → / Home / End</span>
+    </div>
+    <div class="orbit-table-wrap">
+      <table class="orbit-table" aria-describedby="base-count">
+        <thead><tr id="base-table-head"></tr></thead>
+        <tbody id="base-table-body"><tr><td class="orbit-loading">Chargement</td></tr></tbody>
+      </table>
+    </div>
+    <nav class="console-pagination" aria-label="Pagination base contacts">
+      <button class="orbit-btn small" type="button" id="base-first">Début</button>
+      <button class="orbit-btn small" type="button" id="base-prev">Précédent</button>
+      <span class="orbit-badge" id="base-page-label">Page 1</span>
+      <button class="orbit-btn small" type="button" id="base-next">Suivant</button>
+      <button class="orbit-btn small" type="button" id="base-last">Fin</button>
+    </nav>
+  </div>
+
+  <div class="orbit-modal-backdrop" id="base-columns-modal" aria-hidden="true">
+    <div class="orbit-modal" role="dialog" aria-modal="true" aria-labelledby="base-columns-title">
+      <div class="orbit-modal-header orbit-row-between">
+        <h2 id="base-columns-title">Colonnes visibles</h2>
+        <button class="orbit-btn small" type="button" data-modal-close="base-columns-modal"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button>
+      </div>
+      <div class="orbit-modal-body orbit-stack" id="base-columns-list"></div>
+      <div class="orbit-modal-footer">
+        <button class="orbit-btn" type="button" id="base-columns-reset">Réinitialiser</button>
+        <button class="orbit-btn primary" type="button" data-modal-close="base-columns-modal">Appliquer</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/static/js/base.js"></script>
