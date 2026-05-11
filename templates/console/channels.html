@@ -1,0 +1,85 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="channels">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Channels</p>
+      <h1 class="orbit-title">Ressources canal</h1>
+      <p class="orbit-subtitle">Configure les ressources réelles utilisées par la campagne. Sans configuration, aucun envoi n’est possible.</p>
+    </div>
+  </div>
+
+  <div class="console-vtabs">
+    <div class="console-vtab-list" role="tablist" aria-orientation="vertical">
+      <button class="orbit-btn console-vtab" type="button" role="tab" aria-selected="true" data-channel-tab="email"><i class="bi bi-envelope" aria-hidden="true"></i> Email <span id="email-configured" class="orbit-badge">Non configuré</span></button>
+      <button class="orbit-btn console-vtab" type="button" role="tab" aria-selected="false" data-channel-tab="sms"><i class="bi bi-chat-dots" aria-hidden="true"></i> SMS <span id="sms-configured" class="orbit-badge">Non configuré</span></button>
+      <button class="orbit-btn console-vtab" type="button" role="tab" aria-selected="false" data-channel-tab="whatsapp"><i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp <span id="whatsapp-configured" class="orbit-badge">Non configuré</span></button>
+      <button class="orbit-btn console-vtab" type="button" role="tab" aria-selected="false" data-channel-tab="voice"><i class="bi bi-telephone" aria-hidden="true"></i> Voice <span id="voice-configured" class="orbit-badge">Non configuré</span></button>
+      <button class="orbit-btn console-vtab" type="button" role="tab" aria-selected="false" data-channel-tab="agents"><i class="bi bi-window" aria-hidden="true"></i> Agents Waka <span id="agents-configured" class="orbit-badge">Non configuré</span></button>
+    </div>
+
+    <div class="orbit-card orbit-stack">
+      <form id="channels-form" class="orbit-stack">
+        <section data-channel-panel="email" class="orbit-stack">
+          <h2>Email ACS</h2>
+          <div class="console-form-grid cols-2">
+            <label class="orbit-field"><span class="orbit-label">Subscription</span><select class="orbit-select" id="email_subscription_id" name="email_subscription_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Resource group</span><select class="orbit-select" id="email_resource_group" name="email_resource_group"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Email service</span><select class="orbit-select" id="email_communication_service_id" name="email_communication_service_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Domain</span><select class="orbit-select" id="email_domain" name="email_domain"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Sender username</span><select class="orbit-select" id="email_sender_username" name="email_sender_username"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Display name</span><input class="orbit-input" id="email_display_name" name="email_display_name" type="text"></label>
+            <label class="orbit-field"><span class="orbit-label">Reply-to</span><input class="orbit-input" id="email_reply_to" name="email_reply_to" type="email"></label>
+          </div>
+          <div class="orbit-toolbar"><button class="orbit-btn" type="button" data-create-resource="email_domain">Créer domain</button><button class="orbit-btn" type="button" data-create-resource="email_sender">Créer sender</button><button class="orbit-btn primary" type="button" data-channel-save="email">Sauvegarder Email</button></div>
+        </section>
+
+        <section data-channel-panel="sms" class="orbit-stack console-hidden">
+          <h2>SMS ACS</h2>
+          <div class="console-form-grid cols-2">
+            <label class="orbit-field"><span class="orbit-label">Subscription</span><select class="orbit-select" id="sms_subscription_id" name="sms_subscription_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Resource group</span><select class="orbit-select" id="sms_resource_group" name="sms_resource_group"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Communication service</span><select class="orbit-select" id="sms_communication_service_id" name="sms_communication_service_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Phone number</span><select class="orbit-select" id="sms_phone_number" name="sms_phone_number"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Kind</span><select class="orbit-select" id="sms_phone_number_kind" name="sms_phone_number_kind"><option value="local">Local</option><option value="toll_free">Toll free</option><option value="short_code">Short code</option></select></label>
+          </div>
+          <div class="orbit-toolbar"><button class="orbit-btn" type="button" data-create-resource="sms_phone_number">Acheter numéro</button><button class="orbit-btn primary" type="button" data-channel-save="sms">Sauvegarder SMS</button></div>
+        </section>
+
+        <section data-channel-panel="whatsapp" class="orbit-stack console-hidden">
+          <h2>WhatsApp</h2>
+          <div class="console-form-grid cols-2">
+            <label class="orbit-field"><span class="orbit-label">Subscription</span><select class="orbit-select" id="whatsapp_subscription_id" name="whatsapp_subscription_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Resource group</span><select class="orbit-select" id="whatsapp_resource_group" name="whatsapp_resource_group"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Messages service</span><select class="orbit-select" id="whatsapp_messages_service_id" name="whatsapp_messages_service_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Channel registration</span><select class="orbit-select" id="whatsapp_channel_id" name="whatsapp_channel_id"></select></label>
+          </div>
+          <div class="orbit-toolbar"><button class="orbit-btn" type="button" data-create-resource="whatsapp_channel">Créer channel</button><button class="orbit-btn primary" type="button" data-channel-save="whatsapp">Sauvegarder WhatsApp</button></div>
+        </section>
+
+        <section data-channel-panel="voice" class="orbit-stack console-hidden">
+          <h2>Voice Compeak</h2>
+          <div class="console-form-grid cols-2">
+            <label class="orbit-field"><span class="orbit-label">Provider</span><input class="orbit-input" id="voice_provider" name="voice_provider" value="compeak"></label>
+            <label class="orbit-field"><span class="orbit-label">Compeak account</span><select class="orbit-select" id="voice_compeak_account_id" name="voice_compeak_account_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Inbound number</span><select class="orbit-select" id="voice_inbound_number" name="voice_inbound_number"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Trunk SIP</span><select class="orbit-select" id="voice_trunk_id" name="voice_trunk_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Key Vault credentials ref</span><input class="orbit-input" id="voice_kv_credentials_ref" name="voice_kv_credentials_ref"></label>
+          </div>
+          <div class="orbit-toolbar"><button class="orbit-btn" type="button" data-create-resource="voice_number">Acheter numéro</button><button class="orbit-btn" type="button" data-create-resource="voice_trunk">Provisionner trunk</button><button class="orbit-btn primary" type="button" data-channel-save="voice">Sauvegarder Voice</button></div>
+        </section>
+
+        <section data-channel-panel="agents" class="orbit-stack console-hidden">
+          <h2>Agents Waka</h2>
+          <div class="console-form-grid cols-2">
+            <label class="orbit-field"><span class="orbit-label">Agent texte</span><select class="orbit-select" id="agent_text_id" name="agent_text_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Agent voix</span><select class="orbit-select" id="agent_voice_id" name="agent_voice_id"></select></label>
+            <label class="orbit-field"><span class="orbit-label">Agent avatar</span><select class="orbit-select" id="agent_avatar_id" name="agent_avatar_id"></select></label>
+          </div>
+          <div class="orbit-toolbar"><button class="orbit-btn primary" type="button" data-channel-save="agents">Sauvegarder Agents</button></div>
+        </section>
+      </form>
+    </div>
+  </div>
+
+  <div class="orbit-modal-backdrop" id="channels-create-modal" aria-hidden="true"><div class="orbit-modal" role="dialog" aria-modal="true" aria-labelledby="channels-create-title"><div class="orbit-modal-header orbit-row-between"><h2 id="channels-create-title">Créer une ressource</h2><button class="orbit-btn small" type="button" data-modal-close="channels-create-modal"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button></div><div class="orbit-modal-body orbit-stack" id="channels-create-body"></div><div class="orbit-modal-footer"><button class="orbit-btn primary" type="button" id="channels-create-confirm">Créer</button></div></div></div>
+</section>
+<script type="module" src="/static/js/channels.js"></script>
