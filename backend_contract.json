@@ -1,0 +1,89 @@
+{
+  "service": "orbit-campaign-nabi",
+  "campaign_id": "91b22035-842f-4290-8c31-9f0fa9f26de5",
+  "actions": [
+    {"node_id": "A", "channel": "email", "mode": "generated", "endpoint": "POST /actions/A/run", "artifact_ref": "art_email_A"},
+    {"node_id": "B", "channel": "sms", "mode": "templated", "endpoint": "POST /actions/B/run", "artifact_ref": "art_sms_B"}
+  ],
+  "channel_select_endpoints": [
+    {"kind": "email", "list_cascade": ["GET /api/channels/email/subscriptions", "GET /api/channels/email/{sub}/resource-groups", "GET /api/channels/email/{sub}/{rg}/email-services", "GET /api/channels/email/{svc}/domains", "GET /api/channels/email/{svc}/{domain}/senders"], "select": "POST /api/channels/email/select", "create": ["POST /api/channels/email/{svc}/domains/create", "POST /api/channels/email/{svc}/{domain}/senders/create"]},
+    {"kind": "sms", "list_cascade": ["GET /api/channels/sms/subscriptions", "GET /api/channels/sms/{sub}/resource-groups", "GET /api/channels/sms/{sub}/{rg}/communication-services", "GET /api/channels/sms/{svc}/phone-numbers"], "select": "POST /api/channels/sms/select", "create": ["POST /api/channels/sms/{svc}/phone-numbers/purchase"]},
+    {"kind": "whatsapp", "list_cascade": ["GET /api/channels/whatsapp/subscriptions", "GET /api/channels/whatsapp/{sub}/resource-groups", "GET /api/channels/whatsapp/{sub}/{rg}/messages-services", "GET /api/channels/whatsapp/{svc}/channels"], "select": "POST /api/channels/whatsapp/select", "create": ["POST /api/channels/whatsapp/{svc}/channels/register"]},
+    {"kind": "voice", "list_cascade": ["GET /api/channels/voice/compeak/accounts", "GET /api/channels/voice/compeak/{account}/numbers", "GET /api/channels/voice/compeak/{account}/trunks"], "select": "POST /api/channels/voice/select", "create": ["POST /api/channels/voice/compeak/numbers/purchase", "POST /api/channels/voice/compeak/trunk/provision"]},
+    {"kind": "agents_waka", "list_cascade": ["GET /api/channels/text/agents", "GET /api/channels/voice/agents", "GET /api/channels/avatar/agents"], "select": "POST /api/channels/text/select", "create": []}
+  ],
+  "ui_provided_variables": {
+    "email": [
+      {"id": "email_subscription_id", "type": "string", "label": "Souscription Azure"},
+      {"id": "email_resource_group", "type": "string", "label": "Resource Group"},
+      {"id": "email_communication_service_id", "type": "string", "label": "Email Communication Service"},
+      {"id": "email_domain", "type": "string", "label": "Domaine"},
+      {"id": "email_sender_username", "type": "string", "label": "MailFrom username"},
+      {"id": "email_display_name", "type": "string", "label": "Display name"},
+      {"id": "email_reply_to", "type": "string", "label": "Reply-to (optionnel)"}
+    ],
+    "sms": [
+      {"id": "sms_subscription_id", "type": "string"},
+      {"id": "sms_resource_group", "type": "string"},
+      {"id": "sms_communication_service_id", "type": "string"},
+      {"id": "sms_phone_number", "type": "string"},
+      {"id": "sms_phone_number_kind", "type": "enum", "values": ["local", "toll-free", "short-code"]}
+    ],
+    "whatsapp": [
+      {"id": "whatsapp_subscription_id", "type": "string"},
+      {"id": "whatsapp_resource_group", "type": "string"},
+      {"id": "whatsapp_messages_service_id", "type": "string"},
+      {"id": "whatsapp_channel_id", "type": "string"}
+    ],
+    "voice": [
+      {"id": "voice_provider", "type": "enum", "values": ["compeak"]},
+      {"id": "voice_compeak_account_id", "type": "string"},
+      {"id": "voice_inbound_number", "type": "string"},
+      {"id": "voice_trunk_id", "type": "string"},
+      {"id": "voice_kv_credentials_ref", "type": "string"}
+    ],
+    "agents_waka": [
+      {"id": "agent_text_id", "type": "string", "source": "ConversationsDB.text_agents"},
+      {"id": "agent_voice_id", "type": "string", "source": "ConversationsDB.voice_agents"},
+      {"id": "agent_avatar_id", "type": "string", "source": "ConversationsDB.avatar_agents"}
+    ]
+  },
+  "source_edit_endpoints": {
+    "list": "GET /api/console/sources",
+    "read": "GET /api/console/sources/<id>",
+    "patch": "PATCH /api/console/sources/<id>",
+    "history": "GET /api/console/sources/<id>/history",
+    "test": "POST /api/console/sources/<id>/test"
+  },
+  "console_endpoints": [
+    {"section": "main", "method": "GET", "path": "/api/console/main"},
+    {"section": "base", "method": "GET", "path": "/api/console/base"},
+    {"section": "plan", "method": "GET", "path": "/api/console/plan"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/start"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/pause"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/resume"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/stop"},
+    {"section": "sources", "method": "GET", "path": "/api/console/sources"},
+    {"section": "sources", "method": "GET", "path": "/api/console/sources/<id>"},
+    {"section": "sources", "method": "PATCH", "path": "/api/console/sources/<id>"},
+    {"section": "dashboard", "method": "GET", "path": "/api/console/dashboard"},
+    {"section": "inbox", "method": "GET", "path": "/api/console/inbox/<canal>"},
+    {"section": "inbox", "method": "POST", "path": "/api/console/inbox/<msg_id>/reply"}
+  ],
+  "tracking_endpoints": [
+    {"path": "/track/open/<step_id>", "method": "GET"},
+    {"path": "/track/click/<step_id>", "method": "GET"},
+    {"path": "/unsubscribe/<contact_id>", "method": "GET"}
+  ],
+  "webhooks": [
+    {"source": "event_grid_acs_email", "path": "/webhooks/email/delivery"},
+    {"source": "event_grid_acs_sms", "path": "/webhooks/sms/event"},
+    {"source": "event_grid_acs_whatsapp", "path": "/webhooks/whatsapp/event"},
+    {"source": "compeak", "path": "/webhooks/voice/event"},
+    {"source": "waka_agent", "path": "/webhooks/agent/<agent_id>"}
+  ],
+  "sse_streams": [
+    {"path": "/events", "events": ["step.completed", "inbox.email.new", "kpi.updated"]}
+  ]
+}
