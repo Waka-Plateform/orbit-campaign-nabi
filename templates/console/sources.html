@@ -1,0 +1,52 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="sources">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Sources</p>
+      <h1 class="orbit-title">Prompts, templates et agents</h1>
+      <p class="orbit-subtitle">Une ligne par étape éditable du flow. Les sauvegardes s’appliquent aux prochains envois.</p>
+    </div>
+  </div>
+
+  <div class="orbit-card orbit-stack">
+    <div class="orbit-table-wrap">
+      <table class="orbit-table">
+        <thead><tr><th>Mode</th><th>Canal</th><th>Étape</th><th>Statut</th><th>Dernière édition</th><th>Actions</th></tr></thead>
+        <tbody id="sources-table-body"><tr><td colspan="6" class="orbit-loading">Chargement</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <aside class="orbit-drawer" id="sources-editor-drawer" aria-hidden="true" aria-label="Éditeur source">
+    <div class="orbit-drawer-header orbit-row-between">
+      <strong id="sources-editor-title">Source</strong>
+      <button class="orbit-btn small" type="button" data-close-drawer="sources-editor-drawer"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button>
+    </div>
+    <div class="orbit-drawer-body orbit-stack">
+      <div id="sources-editor-meta" class="orbit-stack"></div>
+      <textarea class="console-editor" id="sources-editor-content" spellcheck="false"></textarea>
+      <iframe class="console-preview-frame" id="sources-preview" sandbox="" title="Aperçu rendu"></iframe>
+      <div class="orbit-toolbar">
+        <button class="orbit-btn primary" type="button" id="sources-save"><i class="bi bi-save" aria-hidden="true"></i> Sauvegarder</button>
+        <button class="orbit-btn" type="button" id="sources-test"><i class="bi bi-send" aria-hidden="true"></i> Tester</button>
+        <button class="orbit-btn" type="button" id="sources-regenerate"><i class="bi bi-stars" aria-hidden="true"></i> Régénérer IA</button>
+        <button class="orbit-btn" type="button" id="sources-history"><i class="bi bi-clock-history" aria-hidden="true"></i> Historique</button>
+      </div>
+      <div id="sources-history-list" class="orbit-stack"></div>
+    </div>
+  </aside>
+
+  <div class="orbit-modal-backdrop" id="sources-regenerate-modal" aria-hidden="true">
+    <div class="orbit-modal" role="dialog" aria-modal="true" aria-labelledby="sources-regenerate-title">
+      <div class="orbit-modal-header orbit-row-between">
+        <h2 id="sources-regenerate-title">Régénérer avec IA</h2>
+        <button class="orbit-btn small" type="button" data-modal-close="sources-regenerate-modal"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button>
+      </div>
+      <div class="orbit-modal-body orbit-stack">
+        <label class="orbit-field"><span class="orbit-label">Instruction ponctuelle</span><textarea class="orbit-textarea" id="sources-regenerate-instruction"></textarea></label>
+        <label class="orbit-field"><span class="orbit-label">Mode</span><select class="orbit-select" id="sources-regenerate-mode"><option value="one_shot">Override one-shot</option><option value="save_prompt">Sauvegarder le prompt campagne</option></select></label>
+      </div>
+      <div class="orbit-modal-footer"><button class="orbit-btn primary" type="button" id="sources-regenerate-confirm">Régénérer</button></div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/static/js/sources.js"></script>
