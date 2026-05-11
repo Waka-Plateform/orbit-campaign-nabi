@@ -1,0 +1,87 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="main">
+  <nav class="console-anchor-nav" aria-label="Navigation interne">
+    <a class="orbit-btn small" href="#campaign-presentation">Présentation</a>
+    <a class="orbit-btn small" href="#campaign-base-summary">Base</a>
+    <a class="orbit-btn small" href="#campaign-flow">Flow</a>
+    <a class="orbit-btn small" href="#campaign-objectives">Objectifs</a>
+  </nav>
+
+  <section id="campaign-presentation" class="orbit-card console-hero">
+    <div>
+      <p class="orbit-kicker">Campagne</p>
+      <h1 class="orbit-title" id="main-campaign-name">nabi</h1>
+      <p class="orbit-subtitle" id="main-objective">Atteindre 70% de clics vers le lien de l’agent Waka afin de qualifier les demandes de devis client.</p>
+      <div class="orbit-toolbar">
+        <span class="orbit-badge info" id="main-status"><i class="bi bi-activity" aria-hidden="true"></i> Chargement</span>
+        <span class="console-muted" id="main-go-live">Go-live non planifié</span>
+      </div>
+    </div>
+    <aside class="orbit-stack">
+      <div class="console-stat">
+        <span class="console-stat-value" id="main-owner">Orbit</span>
+        <span class="console-stat-label">Propriétaire</span>
+      </div>
+      <div class="orbit-toolbar" aria-label="Actions cycle de vie">
+        <button class="orbit-btn" type="button" data-main-action="pause"><i class="bi bi-pause-fill" aria-hidden="true"></i> Pause</button>
+        <button class="orbit-btn" type="button" data-main-action="resume"><i class="bi bi-play-fill" aria-hidden="true"></i> Reprendre</button>
+        <button class="orbit-btn danger" type="button" data-main-action="stop"><i class="bi bi-stop-fill" aria-hidden="true"></i> Terminer</button>
+      </div>
+    </aside>
+  </section>
+
+  <section id="campaign-base-summary" class="orbit-card orbit-stack">
+    <div class="orbit-card-header">
+      <div>
+        <p class="orbit-kicker">Base</p>
+        <h2 class="orbit-title">Contacts et audiences</h2>
+      </div>
+      <a class="orbit-btn" href="#base"><i class="bi bi-table" aria-hidden="true"></i> Voir la base complète</a>
+    </div>
+    <div class="orbit-grid cols-3">
+      <div class="console-stat">
+        <span class="console-stat-value" id="main-contact-count">0</span>
+        <span class="console-stat-label">contacts importés</span>
+      </div>
+      <div class="orbit-panel">
+        <h3>Répartition par source</h3>
+        <div class="console-donut" id="main-source-donut" aria-label="Répartition des sources"></div>
+        <div id="main-source-legend" class="orbit-stack"></div>
+      </div>
+      <div class="orbit-panel">
+        <h3>Répartition par audience</h3>
+        <div class="console-bars" id="main-audience-bars"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="campaign-flow" class="orbit-card orbit-stack">
+    <div class="orbit-card-header">
+      <div>
+        <p class="orbit-kicker">Flow runtime</p>
+        <h2 class="orbit-title">Parcours d’exécution</h2>
+      </div>
+      <span class="orbit-badge" id="main-flow-version">Version runtime</span>
+    </div>
+    <div class="console-flow-frame">
+      <object id="main-flow-object" data="/api/console/flow.svg?mode=runtime" type="image/svg+xml" aria-label="Diagramme SVG du flow campagne"></object>
+    </div>
+    <p class="console-muted">Clique sur un nœud du flow pour ouvrir la source correspondante.</p>
+  </section>
+
+  <section id="campaign-objectives" class="orbit-card orbit-stack">
+    <div>
+      <p class="orbit-kicker">Objectifs</p>
+      <h2 class="orbit-title">Métriques de succès déclarées</h2>
+    </div>
+    <div id="main-metrics" class="orbit-grid cols-3"></div>
+  </section>
+
+  <aside class="orbit-drawer" id="main-flow-drawer" aria-hidden="true" aria-label="Détail nœud flow">
+    <div class="orbit-drawer-header orbit-row-between">
+      <strong id="main-flow-drawer-title">Source du nœud</strong>
+      <button class="orbit-btn small" type="button" data-close-drawer="main-flow-drawer"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button>
+    </div>
+    <div class="orbit-drawer-body" id="main-flow-drawer-body"></div>
+  </aside>
+</section>
+<script type="module" src="/static/js/sse.js"></script>
