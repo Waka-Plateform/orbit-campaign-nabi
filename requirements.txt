@@ -1,0 +1,14 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+httpx==0.28.1
+azure-identity==1.19.0
+azure-keyvault-secrets==4.9.0
+azure-data-tables==12.6.0
+azure-storage-blob==12.24.0
+azure-cosmos==4.9.0
+azure-communication-email==1.0.0
+azure-communication-sms==1.1.0
+azure-mgmt-resource==23.2.0
+azure-mgmt-communication==3.0.0
+python-multipart==0.0.20
