@@ -1,0 +1,37 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="dashboard">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Dashboard</p>
+      <h1 class="orbit-title">Analytique campagne</h1>
+      <p class="orbit-subtitle">KPIs, séries temporelles, breakdowns par canal, étape, audience et drill-down contact.</p>
+    </div>
+    <form class="orbit-toolbar" id="dashboard-filters">
+      <select class="orbit-select" id="dashboard-metric" name="metric"><option value="sent">Envois</option><option value="delivered">Délivrés</option><option value="opens">Ouvertures</option><option value="clicks">Clics</option><option value="replies">Réponses</option></select>
+      <select class="orbit-select" id="dashboard-period" name="period"><option value="7d">7 jours</option><option value="30d">30 jours</option><option value="90d">90 jours</option></select>
+    </form>
+  </div>
+
+  <div class="console-stat-grid" id="dashboard-kpis"></div>
+
+  <div class="orbit-grid cols-2">
+    <section class="orbit-card orbit-stack">
+      <h2>Courbe temporelle</h2>
+      <div class="console-chart" id="dashboard-timeseries" aria-label="Courbe temporelle"></div>
+    </section>
+    <section class="orbit-card orbit-stack">
+      <h2>Breakdown par canal</h2>
+      <div id="dashboard-channel-breakdown" class="console-bars"></div>
+    </section>
+  </div>
+
+  <div class="orbit-grid cols-2">
+    <section class="orbit-card orbit-stack"><h2>Par étape du flow</h2><div id="dashboard-step-breakdown" class="console-bars"></div></section>
+    <section class="orbit-card orbit-stack"><h2>Par audience</h2><div id="dashboard-audience-breakdown" class="console-bars"></div></section>
+  </div>
+
+  <aside class="orbit-drawer" id="dashboard-drilldown-drawer" aria-hidden="true" aria-label="Drill-down contacts">
+    <div class="orbit-drawer-header orbit-row-between"><strong>Contacts filtrés</strong><button class="orbit-btn small" type="button" data-close-drawer="dashboard-drilldown-drawer"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button></div>
+    <div class="orbit-drawer-body" id="dashboard-drilldown-body"></div>
+  </aside>
+</section>
+<script type="module" src="/static/js/dashboard.js"></script>
