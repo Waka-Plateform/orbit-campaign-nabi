@@ -1,0 +1,45 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  IMAGE_NAME: orbit-campaign-nabi
+  RESOURCE_GROUP: rg-orbit-campaign-nabi
+  CONTAINER_APP: ca-orbit-campaign-nabi
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Build and push image
+        run: |
+          az acr login --name ${{ vars.ACR_NAME }}
+          IMAGE=${{ vars.ACR_LOGIN_SERVER }}/${IMAGE_NAME}:${{ github.sha }}
+          docker build -t $IMAGE .
+          docker push $IMAGE
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+      - name: Deploy infrastructure
+        run: |
+          az deployment group create \
+            --resource-group $RESOURCE_GROUP \
+            --template-file infra/main.bicep \
+            --parameters image=$IMAGE managedIdentityClientId=${{ vars.CAMPAIGN_MI_CLIENT_ID }}
+      - name: Update Container App image
+        run: az containerapp update -g $RESOURCE_GROUP -n $CONTAINER_APP --image $IMAGE
+      - name: Smoke health
+        run: |
+          FQDN=$(az containerapp show -g $RESOURCE_GROUP -n $CONTAINER_APP --query properties.configuration.ingress.fqdn -o tsv)
+          curl -fsS https://$FQDN/health
