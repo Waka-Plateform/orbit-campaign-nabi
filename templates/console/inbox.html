@@ -1,0 +1,40 @@
+<section class="orbit-section orbit-stack-lg" data-console-section="inbox">
+  <div class="orbit-card-header">
+    <div>
+      <p class="orbit-kicker">Interactions</p>
+      <h1 class="orbit-title">Inbox unifiée</h1>
+      <p class="orbit-subtitle">Messages entrants et sortants Email, SMS, WhatsApp, Voice et Webhook. Les emails sont lus à la demande depuis la shared mailbox M365.</p>
+    </div>
+  </div>
+
+  <div class="orbit-card orbit-stack">
+    <div class="console-tabs" role="tablist" aria-label="Canaux inbox">
+      <button class="console-tab" type="button" role="tab" aria-selected="true" data-inbox-channel="email">Email</button>
+      <button class="console-tab" type="button" role="tab" aria-selected="false" data-inbox-channel="sms">SMS</button>
+      <button class="console-tab" type="button" role="tab" aria-selected="false" data-inbox-channel="whatsapp">WhatsApp</button>
+      <button class="console-tab" type="button" role="tab" aria-selected="false" data-inbox-channel="voice">Voice</button>
+      <button class="console-tab" type="button" role="tab" aria-selected="false" data-inbox-channel="webhook">Webhook</button>
+    </div>
+    <form class="orbit-toolbar" id="inbox-toolbar">
+      <button class="orbit-btn" type="button" id="inbox-mark-read">Tout marquer lu</button>
+      <select class="orbit-select" id="inbox-folder" name="folder"><option value="inbox">Inbox</option><option value="archive">Archive</option><option value="spam">Spam</option></select>
+      <input class="orbit-input" id="inbox-search" name="q" type="search" placeholder="Recherche interactions">
+      <a class="orbit-btn" id="inbox-export" href="/api/console/inbox.csv?channel=email"><i class="bi bi-download" aria-hidden="true"></i> Export CSV</a>
+    </form>
+  </div>
+
+  <div class="console-inbox-layout">
+    <section class="orbit-card orbit-stack"><div class="orbit-row-between"><h2>IN</h2><span id="inbox-in-count" class="orbit-badge">0</span></div><div class="console-message-list" id="inbox-in-list"></div></section>
+    <section class="orbit-card orbit-stack"><div class="orbit-row-between"><h2>OUT</h2><span id="inbox-out-count" class="orbit-badge">0</span></div><div class="console-message-list" id="inbox-out-list"></div></section>
+  </div>
+
+  <aside class="orbit-drawer" id="inbox-detail-drawer" aria-hidden="true" aria-label="Détail interaction">
+    <div class="orbit-drawer-header orbit-row-between"><strong id="inbox-detail-title">Message</strong><button class="orbit-btn small" type="button" data-close-drawer="inbox-detail-drawer"><i class="bi bi-x-lg" aria-hidden="true"></i> Fermer</button></div>
+    <div class="orbit-drawer-body orbit-stack">
+      <div id="inbox-detail-body"></div>
+      <label class="orbit-field"><span class="orbit-label">Réponse</span><textarea class="orbit-textarea" id="inbox-reply-body"></textarea></label>
+      <div class="orbit-toolbar"><button class="orbit-btn primary" type="button" id="inbox-reply-send"><i class="bi bi-reply" aria-hidden="true"></i> Répondre</button><button class="orbit-btn" type="button" id="inbox-archive">Archiver</button><button class="orbit-btn" type="button" id="inbox-toggle-read">Lu / non lu</button></div>
+    </div>
+  </aside>
+</section>
+<script type="module" src="/static/js/inbox.js"></script>
