@@ -11,6 +11,8 @@ permissions:
 env:
   IMAGE_NAME: orbit-campaign-nabi
   ACR_LOGIN_SERVER: crorbitplatform.azurecr.io
+  ACR_USERNAME: ${{ vars.ACR_USERNAME }}
+  ACR_PASSWORD: ${{ vars.ACR_PASSWORD }}
 
 jobs:
   build-push:
@@ -22,25 +24,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${{ vars.ACR_USERNAME }}" || { echo "ACR_USERNAME repo variable is missing"; exit 1; }
-          test -n "${{ vars.ACR_PASSWORD }}" || { echo "ACR_PASSWORD repo variable is missing"; exit 1; }
+          test -n "$ACR_USERNAME" || { echo "ACR_USERNAME repo variable is missing"; exit 1; }
+          test -n "$ACR_PASSWORD" || { echo "ACR_PASSWORD repo variable is missing"; exit 1; }
           echo "ACR inputs present"
 
       - name: Docker login to ACR
         shell: bash
         run: |
           set -euo pipefail
-          echo "${{ vars.ACR_PASSWORD }}" | docker login "${ACR_LOGIN_SERVER}" --username "${{ vars.ACR_USERNAME }}" --password-stdin
+          echo "$ACR_PASSWORD" | docker login "$ACR_LOGIN_SERVER" --username "$ACR_USERNAME" --password-stdin
 
       - name: Build and push image
         shell: bash
         run: |
           set -euo pipefail
-          IMAGE="${ACR_LOGIN_SERVER}/${IMAGE_NAME}:${GITHUB_SHA}"
+          IMAGE="$ACR_LOGIN_SERVER/$IMAGE_NAME:$GITHUB_SHA"
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
           echo "Image pushed: $IMAGE"
 
       - name: Build summary
         run: |
-          echo "image=${ACR_LOGIN_SERVER}/${IMAGE_NAME}:${GITHUB_SHA}" >> "$GITHUB_STEP_SUMMARY"
+          echo "image=$ACR_LOGIN_SERVER/$IMAGE_NAME:$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
